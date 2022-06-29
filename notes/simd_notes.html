@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+	<link rel="shortcut icon" href="favicon.ico">
+	<title>SIMD</title>
+
+	<style>
+	body {
+		font-family: Verdana, Geneva, sans-serif;
+		font-size: 90%;
+		color: #223344;
+		background-color: #F0F0F5;
+		padding-top:12px; padding-left:12px; padding-right:12px; padding-bottom:12px;
+	}
+	#main_text {
+		width: 90%;
+		background-color: #FEFEFF;
+		border: 2px solid;
+		border-color: #8899AA;
+		padding-top:2%; padding-left:4%; padding-right:4%; padding-bottom:2%;
+	}
+	.header_text {
+		color: #447755;
+		font-size: 130%;
+	}
+	hr {
+		color: #99AA88;
+		border: 1px dashed;
+	}
+	code {
+		border: 1px dotted;
+		border-color: #112288;
+		width: 80%;
+		padding-top:1%; padding-left:1%; padding-right:1%; padding-bottom:1%;
+		font-family: monospace;
+		font-size: 10pt;
+		display: block;
+	}
+	a { color:#575754; }
+	</style>
+
+</head>
+
+<body>
+	<table id="main_text"><tr><td>
+		<!-- text start -->
+		<div class="header_text">&#x270D; WebAssembly SIMD in <a href="https://github.com/glebnovodran/ostinato">Ostinato</a>.</div>
+		<hr/>
+		<p>
+			<a href="perf_ostinato.html">Examining</a> Webassembly performance in different browsers on variouos platforms at the moment suggests that a SIMD-enabled version do not exhibits any distinct speed improvement.
+		</p>
+		<p>
+			In the 'precise' mode the matrix multiplication routine cxMtx::mul is called about 1500 per frame.
+			Supposedly, even a small improvement in its performance would result in a noticable improvement in overal metrics.
+			This observation is relevant to the game-specific workload only. I.e.the matrices are getting multiplied often, but those are 4x4 transformation matrices.
+			The situation could be quite different for matrices of significantly bigger sizes.
+		</p>
+		<p>The difference between the native versions compiled with and without SIMD instructions enabled is marginal, but a tiny improvement is present.</p>
+		<p>Nethertheless, it is interesting to take a look into the code clang create for this demo and compare the 'vectorized' version with the 'scalar' one</p>
+
+		<p>First we need to produce a web-version with the assembly code that is not embedded into the page</p>
+		<p>This is how to do it enabling SIMD vectorization </p>
+		<code>
+			./build.sh wasm-0 -g -msimd128
+		</code>
+		<p>Without vectorization enabled</p>
+		<code>
+			./build.sh wasm-0 -g
+		</code>
+		<p>Extract the listing with</p>
+		<code>
+			$EMSDK/upstream/bin/wasm-dis bin/ostinato.wasm > ostinato_wasm.txt
+		</code>
+		<br/>
+		<p>Native build with SIMD code generation enabled</p>
+		<code>
+			CXX=clang++ ./build.sh -O3 -march=native
+		</code>
+		<p>And without SIMD code generation</p>
+		<code>
+			CXX=clang++ ./build.sh -O3 -march=native -fno-slp-vectorize
+		</code>
+		<p>To get the listing execute </p>
+		<code>
+			objdump -CD bin/prog/ostinato > ostinato_native.txt
+		</code>
+		<!-- text end -->
+		<br/>
+	</td></tr></table>
+</body>
+
+</html>
+
