@@ -57,8 +57,8 @@
 		</p>
 		<p>
 			In the 'precise' mode the matrix multiplication routine cxMtx::mul is called about 1500 per frame.
-			Supposedly, even a small improvement in its performance would result in a noticable improvement in overal metrics.
-			This observation is relevant to the game-specific workload only. I.e.the matrices are getting multiplied often, but those are 4x4 transformation matrices.
+			Supposedly, even a small improvement in its performance would result in some noticeable speed-up.
+			This observation is relevant to the game-specific workload only. I.e.the matrices are getting multiplied often, but those are small 4x4 matrices typical in this context.
 			The situation could be quite different for matrices of significantly bigger sizes.
 		</p>
 		<p>The difference between the native versions compiled with and without SIMD instructions enabled is marginal, but a tiny improvement is present.</p>
