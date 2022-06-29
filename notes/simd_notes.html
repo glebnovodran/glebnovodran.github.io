@@ -62,31 +62,31 @@
 			The situation could be quite different for matrices of significantly bigger sizes.
 		</p>
 		<p>The difference between the native versions compiled with and without SIMD instructions enabled is marginal, but a tiny improvement is present.</p>
-		<p>Nethertheless, it is interesting to take a look at the code clang creates for this demo and to compare the 'vectorized' version with the 'scalar' one</p>
+		<p>Nethertheless, it is interesting to take a look at the code clang creates for this demo and to compare the 'vectorized' version with the 'scalar' one.</p>
 
-		<p>First we need to produce a web-version with the assembly code that is not embedded into the page</p>
-		<p>This is how to do it enabling SIMD vectorization </p>
+		<p>First we need to produce a web-version with the assembly code that is not embedded into the page.</p>
+		<p>This is how to do it enabling SIMD vectorization:</p>
 		<code>
 			./build.sh wasm-0 -g -msimd128
 		</code>
-		<p>Without vectorization enabled</p>
+		<p>Without vectorization enabled:</p>
 		<code>
 			./build.sh wasm-0 -g
 		</code>
-		<p>Extract the listing with</p>
+		<p>Extract the listing with:</p>
 		<code>
 			$EMSDK/upstream/bin/wasm-dis bin/ostinato.wasm > ostinato_wasm.txt
 		</code>
 		<br/>
-		<p>Native build with SIMD code generation enabled</p>
+		<p>Native build with SIMD code generation enabled:</p>
 		<code>
 			CXX=clang++ ./build.sh -O3 -march=native
 		</code>
-		<p>And without SIMD code generation</p>
+		<p>And without SIMD code generation:</p>
 		<code>
 			CXX=clang++ ./build.sh -O3 -march=native -fno-slp-vectorize
 		</code>
-		<p>To get the listing execute </p>
+		<p>To extract the listing:</p>
 		<code>
 			objdump -CD bin/prog/ostinato > ostinato_native.txt
 		</code>
