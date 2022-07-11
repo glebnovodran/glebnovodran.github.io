@@ -56,7 +56,7 @@
 			<a href="perf_ostinato.html">Examining</a> Webassembly performance in different browsers on variouos platforms at the moment suggests that a SIMD-enabled version do not exhibits any distinct speed improvement.
 		</p>
 		<p>
-			In the 'precise' mode the matrix multiplication routine cxMtx::mul is called about 1500 per frame.
+			In the 'precise' mode the matrix multiplication routine cxMtx::mul is called about 1500 times per frame.
 			Supposedly, even a small improvement in its performance would result in some noticeable speed-up.
 			This observation is relevant to the game-specific workload only. I.e.the matrices are getting multiplied often, but those are small 4x4 matrices typical in this context.
 			The situation could be quite different for matrices of significantly bigger sizes.
