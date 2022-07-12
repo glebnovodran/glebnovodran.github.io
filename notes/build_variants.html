@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+	<link rel="shortcut icon" href="favicon.ico">
+	<title>Build variants</title>
+	<link rel="stylesheet" href="notes.css" />
+</head>
+<body>
+	<table id="main_text"><tr><td>
+		<!-- text start -->
+		<div class="header_text">&#x270D; <a href="https://github.com/glebnovodran/ostinato">Ostinato</a> build variants.</div>
+		<hr/>
+		<!-- text end -->
+		<h4>Native build for Linux</h4>
+		<p>With SIMD code generation enabled:</p>
+		<code>
+			CXX=clang++ ./build.sh -O3 -march=native
+		</code>
+		<p>Without SIMD code generation:</p>
+		<code>
+			CXX=clang++ ./build.sh -O3 -march=native -fno-slp-vectorize
+		</code>
+		<p>'Classic' FPU instructions build</p>
+		<code>./build.sh -O3 -march=core2 -mfpmath=387 -fno-tree-vectorize</code>
+		<br/>
+		</td></tr>
+	</table>
+</body>
+</html>
