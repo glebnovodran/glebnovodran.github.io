@@ -28,6 +28,10 @@
 		</code>
 		<p>'Classic' FPU instructions build</p>
 		<code>./build.sh -O3 -march=core2 -mfpmath=387 -fno-tree-vectorize</code>
+		<p>Choose xt_xmtx (3x4 transformation matrix) concatenation implementaion type. </p>
+		<code>./build.sh ... -DXD_XMTX_CONCAT_VEC=0|1|2</code>
+		The fastest xt_xmtx concatenation code is produced by
+		<code>./build.sh -O3 -mfpmath=sse -DXD_XMTX_CONCAT_VEC=1</code>
 		<br/>
 		</td></tr>
 	</table>
