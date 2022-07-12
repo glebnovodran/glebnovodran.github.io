@@ -33,6 +33,14 @@
 		The fastest xt_xmtx concatenation code is produced by
 		<code>./build.sh -O3 -mfpmath=sse -DXD_XMTX_CONCAT_VEC=1</code>
 		<br/>
+		<p>Choose cxMtx::invert implementaion. DXD_USE_LA=0 - Cramer's matrix inversion; DXD_USE_LA=1 - Gauss-Jordan</p>
+		<code>./build.sh ... -DXD_USE_LA=0|1</code>
+		<br/>
+		<b>Note:</b> 
+		When compiled with Clang for webassembly with simd instruction enabled -DXD_USE_LA=0 produces an erronous code. Can be some Clang/LLVM problem.
+		<code>
+			./build.sh wasm -msimd128 -DXD_USE_LA=0
+		</code>
 		</td></tr>
 	</table>
 </body>
