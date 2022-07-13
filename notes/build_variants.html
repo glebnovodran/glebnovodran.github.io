@@ -20,24 +20,32 @@
 		<h4>Native build for Linux</h4>
 		<p>With SIMD code generation enabled:</p>
 		<code>
-			CXX=clang++ ./build.sh -O3 -march=native
+			./build.sh -O3 -march=native
 		</code>
 		<p>Without SIMD code generation:</p>
 		<code>
-			CXX=clang++ ./build.sh -O3 -march=native -fno-slp-vectorize
+			./build.sh -O3 -march=native -fno-tree-vectorize -fno-tree-slp-vectorize
 		</code>
-		<p>'Classic' FPU instructions build</p>
+		<p>'Classic' FPU instructions build:</p>
 		<code>./build.sh -O3 -march=core2 -mfpmath=387 -fno-tree-vectorize</code>
-		<p>Choose xt_xmtx (3x4 transformation matrix) concatenation implementaion type. </p>
-		<code>./build.sh ... -DXD_XMTX_CONCAT_VEC=0|1|2</code>
-		The fastest xt_xmtx concatenation code is produced by
-		<code>./build.sh -O3 -mfpmath=sse -DXD_XMTX_CONCAT_VEC=1</code>
-		<br/>
-		<p>Choose cxMtx::invert implementaion. DXD_USE_LA=0 - Cramer's matrix inversion; DXD_USE_LA=1 - Gauss-Jordan</p>
+		<p><b>XD_XMTX_CONCAT_VEC</b> allows to choose an xt_xmtx (3x4 transformation matrix) concatenation implementation:</p>
+		<p>By default it is XD_XMTX_CONCAT_VEC=0 - a 'direct' implementaion without cycles.<br/>
+		Specifying XD_XMTX_CONCAT_VEC=1|2 will choose an implementation with cycles that hints compilers to use SIMD instructions.<br/>
+		XD_XMTX_CONCAT_VEC=2 can be useful if compiling for architectures supporting 512 bit operations (for example avx+).<br/></p>
+
+		<code>./build.sh ... -DXD_XMTX_CONCAT_VEC=0|1|2</code><br/>
+		<p>
+			<b>XD_USE_LA</b> is another useful flag. <a href="https://github.com/schaban/crosscore_dev/">Crosscore</a> contains a set of templates for linear algebra operations.
+			By default 4x4 matrix operations, such as multiplication and vector/point trasnformation, make use of them.<br/>	<br/>
+			<b>Note:</b> the flag changes a cxMtx::invert implementation, as Gauss-Jordan inversion is a part of that LA templates set too:<br/><br/>
+				XD_USE_LA=0 - don't use LA templates; default Cramer's matrix inversion;<br/>
+				XD_USE_LA=1 - use LA templates; matrix inversion using Gauss-Jordan method
+		</p>
 		<code>./build.sh ... -DXD_USE_LA=0|1</code>
 		<br/>
+		<p>
 		<b>Note:</b> 
-		When compiled with Clang for webassembly with simd instruction enabled -DXD_USE_LA=0 produces an erronous code. Can be some Clang/LLVM problem.
+		When compiled with Clang for webassembly and with simd instructions enabled XD_USE_LA=0 produces an erronous code. Can be some Clang/LLVM problem.</p>
 		<code>
 			./build.sh wasm -msimd128 -DXD_USE_LA=0
 		</code>
