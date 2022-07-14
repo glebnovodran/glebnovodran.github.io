@@ -26,29 +26,9 @@
 		<code>
 			./build.sh -O3 -march=native -fno-tree-vectorize -fno-tree-slp-vectorize
 		</code>
-		<p>To buiuld with classical x86 FPU instructions genaration:</p>
+		<p>To build with classical x86 FPU instructions genaration:</p>
 		<code>./build.sh -O3 -march=core2 -mfpmath=387 -fno-tree-vectorize</code>
-		<p><b>XD_XMTX_CONCAT_VEC</b> allows to choose an xt_xmtx (3x4 transformation matrix) concatenation implementation:</p>
-		<p>By default it is XD_XMTX_CONCAT_VEC=0 - a 'direct' implementaion without loops.<br/>
-		Specifying XD_XMTX_CONCAT_VEC=1|2 will choose an implementation with loops that hints compilers to use SIMD instructions.<br/>
-		XD_XMTX_CONCAT_VEC=2 can be useful if compiling for architectures supporting 512 bit operations (for example avx+).<br/></p>
-
-		<code>./build.sh ... -DXD_XMTX_CONCAT_VEC=0|1|2</code><br/>
-		<p>
-			<b>XD_USE_LA</b> is another useful flag. <a href="https://github.com/schaban/crosscore_dev/">Crosscore</a> contains a set of templates for linear algebra operations.
-			By default 4x4 matrix operations, such as multiplication and vector/point trasnformation, make use of them.<br/>	<br/>
-			<b>Note:</b> the flag changes a cxMtx::invert implementation, as Gauss-Jordan inversion is a part of that LA templates set too:<br/><br/>
-				XD_USE_LA=0 - don't use LA templates; default Cramer's matrix inversion;<br/>
-				XD_USE_LA=1 - use LA templates; matrix inversion using Gauss-Jordan method
-		</p>
-		<code>./build.sh ... -DXD_USE_LA=0|1</code>
-		<br/>
-		<p>
-		<b>Note:</b> 
-		When compiled with Clang for webassembly and with simd instructions enabled XD_USE_LA=0 produces an erronous code. Can be some Clang/LLVM problem.</p>
-		<code>
-			./build.sh wasm -msimd128 -DXD_USE_LA=0
-		</code>
+		<p><a href = "./build_params.html">Here</a> are some additional build options worth exploring.</p>
 		</td></tr>
 	</table>
 </body>
