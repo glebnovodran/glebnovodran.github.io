@@ -53,8 +53,8 @@
 		</code>
 		<p>It could be interesting to investigate the code produced by building with <b>XD_XMTX_CONCAT_VEC</b> and <b>XD_USE_LA</b> flags</p>
 		<p><b>XD_XMTX_CONCAT_VEC</b> allows to choose an xt_xmtx (3x4 transformation matrix) concatenation implementation:</p>
-		<p>By default it is XD_XMTX_CONCAT_VEC=0 - a 'direct' implementaion without cycles.<br/>
-		Specifying XD_XMTX_CONCAT_VEC=1|2 will choose an implementation with cycles that hints compilers to use SIMD instructions.<br/>
+		<p>By default it is XD_XMTX_CONCAT_VEC=0 - a 'direct' implementaion without loops.<br/>
+		Specifying XD_XMTX_CONCAT_VEC=1|2 will choose an implementation with loops that hints compilers to use SIMD instructions.<br/>
 		XD_XMTX_CONCAT_VEC=2 can be useful if compiling for architectures supporting 512 bit operations (for example avx+).<br/></p>
 
 		<code>CXX=clang++ ./build.sh ... -DXD_XMTX_CONCAT_VEC=0|1|2</code>
