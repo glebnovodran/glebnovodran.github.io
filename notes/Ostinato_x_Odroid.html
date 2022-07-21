@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+	<link rel="shortcut icon" href="favicon.ico">
+	<title>Build parameters</title>
+	<link rel="stylesheet" href="notes.css" />
+</head>
+
+<body>
+	<table id="main_text"><tr><td>
+		<!-- text start -->
+		<div class="header_text">&#x270D; Ostinato on Odroid</div>
+		<p>
+			First connect to your Odroid device through SSH. You can find out the IP address of your Odroid device in Settings/Network Info.
+			The default password for 'odroid' user is 'odroid'.
+		</p>
+		<code lang="sh">ssh odroid@&lt;ip&gt;</code>
+		<p>At this point it makes sense to run the following command to maximize the device performance.</p>
+		<code lang="sh">/usr/local/bin/perfmax</code>
+		<p>Next, install build-essential and libdrm-dev.</p>
+		<code lang="sh">sudo apt install build-essential libdrm-dev</code>
+		<p>Clone the repository and fetch the Odroid <a href="odroid/build_odroid.sh">build</a> and <a href="odroid/run_odroid.sh">run</a> scripts.</p>
+		<code lang="sh">
+			git clone https://github.com/glebnovodran/ostinato.git<br/>
+			wget https://raw.githubusercontent.com/glebnovodran/glebnovodran.github.io/main/notes/odroid/build_odroid.sh<br/>
+			wget https://raw.githubusercontent.com/glebnovodran/glebnovodran.github.io/main/notes/odroid/run_odroid.sh<br/>
+		</code>
+		<p>Execute the build.</p>
+		<code lang="sh">./build_odroid.sh -O3 -flto</code>
+		<p>Before running Ostinato we need to stop EmulationStation.</p>
+		<code lang="sh">systemctl stop emulationstation</code>
+		<p>Run Ostinato.</p>
+		<code lang="sh">
+		./run_odroid.sh -res2d_scl:0.5
+		</code>
+
+		<!-- text end -->
+	</td></tr>
+</table>
+</body>
+</html>
+
+
