@@ -8,7 +8,7 @@
 	<meta http-equiv="Pragma" content="no-cache">
 	<meta http-equiv="Expires" content="0">
 	<link rel="shortcut icon" href="favicon.ico">
-	<title>Build parameters</title>
+	<title>Ostinato x Ordoid/title>
 	<link rel="stylesheet" href="notes.css" />
 </head>
 
@@ -27,9 +27,9 @@
 		<code lang="sh">sudo apt install build-essential libdrm-dev</code>
 		<p>Clone the repository and fetch the Odroid <a href="odroid/build_odroid.sh">build</a> and <a href="odroid/run_odroid.sh">run</a> scripts.</p>
 		<code lang="sh">
-			git clone https://github.com/glebnovodran/ostinato.git<br/>
-			wget https://raw.githubusercontent.com/glebnovodran/glebnovodran.github.io/main/notes/odroid/build_odroid.sh<br/>
-			wget https://raw.githubusercontent.com/glebnovodran/glebnovodran.github.io/main/notes/odroid/run_odroid.sh<br/>
+			git clone https://github.com/glebnovodran/ostinato.git --depth 1<br/>
+			wget https://glebnovodran.github.io/notes/odroid/build_odroid.sh<br/>
+			wget https://glebnovodran.github.io/notes/odroid/run_odroid.sh<br/>
 		</code>
 		<p>Execute the build.</p>
 		<code lang="sh">./build_odroid.sh -O3 -flto</code>
