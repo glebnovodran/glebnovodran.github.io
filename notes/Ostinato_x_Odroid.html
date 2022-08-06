@@ -53,9 +53,24 @@
 		<code lang="sh">./build_odroid.sh -O3 -flto</code>
 		<p>Before running Ostinato we need to stop EmulationStation.</p>
 		<code lang="sh">systemctl stop emulationstation</code>
-		<p>Run Ostinato.</p>
+		<p>Run Ostinato (-res2d_scl option is to scale the UI font size).</p>
 		<code lang="sh">
 		./run_odroid.sh -res2d_scl:0.5
+		</code>
+		<p>
+			The shader compilation time is rather long on Odroid - it can take about 1 minute to compile Ostinato shaders.<br/>
+			There is an option to save precompiled shaders and use them in the subsequent runs.<br/><br/>
+			To save the compiled shaders:
+		</p>
+		<code lang="sh">
+			mkdir ./bin/prog/gbin
+			./run_odroid.sh -glsl_bin_save:gbin
+		</code>
+		<p>
+			To run with the precompiled shaders:
+		</p>
+		<code lang="sh">
+			./run_odroid.sh -glsl_bin_load:gbin
 		</code>
 
 		<!-- text end -->
