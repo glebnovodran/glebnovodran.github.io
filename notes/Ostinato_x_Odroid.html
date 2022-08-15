@@ -58,6 +58,14 @@
 		./run_odroid.sh -res2d_scl:0.5
 		</code>
 		<p>
+			run_odroid.sh sets up the reduced rendering parameters, such as use of vertex lighting and pseudoshadows.<br/>
+			Also, at the moment Ostinato supports keyboard and mouse control only, so run_odroid.sh sets up a 'redirection' of the Odroid joypad using -kbd_dev option . <br/>
+			The analogue sticks support will be added later.
+		</p>
+		<code lang="sh">
+		-kbd_dev:/dev/input/by-path/`ls /dev/input/by-path | grep "joypad-event"`
+		</code>
+		<p>
 			The shader compilation time is rather long on Odroid - it can take about 1 minute to compile Ostinato shaders.<br/>
 			There is an option to save precompiled shaders and use them in the subsequent runs.<br/><br/>
 			To save the compiled shaders:
@@ -72,7 +80,6 @@
 		<code lang="sh">
 			./run_odroid.sh -glsl_bin_load:gbin
 		</code>
-
 		<!-- text end -->
 	</td></tr>
 </table>
