@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+	<link rel="shortcut icon" href="favicon.ico">
+	<title>Ostinato performance indicators explained</title>
+	<link rel="stylesheet" href="notes.css" />
+	<style>
+		#indicators {
+			table-layout: fixed;
+			background-color: #ffffff;
+			padding-top:8px; padding-left:8px; padding-right:8px; padding-bottom:8px;
+		}
+		td.abbr {
+			font-weight: bold;
+		}
+		td:nth-child(1) {
+			width: 60px;
+		}
+		td:nth-child(2) {
+			width: 750px;
+		}
+	</style>
+</head>
+
+<body>
+	<table id="main_text"><tr><td>
+		<!-- text start -->
+		<div class="header_text">&#x270D; Ostinato performance indicators explained</div><br/>
+		<table>
+			<tr>
+				<td>
+					<a href="images/ostinato_perf_pic3.png">
+						<img src="images/ostinato_perf_pic3.png" width="800" height="451"/>
+					</a>
+				</td>
+
+			</tr>
+		</table>
+		<table id="indicators">
+			<tr>
+				<td class="abbr">FPS:</td>
+				<td>Frames per second. When -swap:0 command line argument is passed, it can be used as a general system performance indicator.</td>
+			</tr>
+			<tr>
+				<td class="abbr">EXE:</td>
+				<td>All the objects 'execution' work - control program execution, motion calculation and blending, collision detection.<br/>
+					Setting -nwrk command line argument to N > 1 will enable parallel execution of those jobs by N workers.
+					EXE time also includes camera program and collision time.
+				</td>
+			</tr>
+			<tr>
+				<td class="abbr">VIS:</td>
+				<td>Scene objects visibility culling.</td>
+			</tr>
+			<tr>
+				<td class="abbr">DRW:</td>
+				<td>Time spent on executing code drawing models, primitives (such as pseudoshadows and sprites) and UI elements. It includes OpenGL function invocation time.</td>
+			</tr>
+			<tr>
+				<td class="abbr">GPU:</td>
+				<td>GPU frame execution time obtained through OpenGL timer queries. Not available for some GPUs.</td>
+			</tr>
+			<tr>
+				<td class="abbr">SUM:</td>
+				<td>EXE + VIS + DRW + GPU</td>
+			</tr>
+		</table>
+		<!-- text end -->
+		</td></tr>
+	</table>
+</body>
+</html>
+
