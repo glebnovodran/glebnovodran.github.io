@@ -43,6 +43,10 @@
 			if (ckb && ckb.checked) {
 				opts += "&pseudoshd&vl";
 			}
+			ckb = document.getElementById("ckb_fp32");
+			if (ckb && ckb.checked) {
+				opts += "&ogl_fp32";
+			}
 			var url = appName + ".html" + opts;
 			window.location.href = url;
 		}
@@ -55,6 +59,8 @@
 	&#x261D;&nbsp;<input type="checkbox" id="ckb_precise">&nbsp;Precise measurements</input>
 	<br/>
 	&#x261D;&nbsp;<input type="checkbox" id="ckb_reduced">&nbsp;Reduced rendering</input>
+	<br/>
+	&#x261D;&nbsp;<input type="checkbox" id="ckb_fp32">&nbsp;FP32 shaders</input>
 	<br/>
 	&#x261B;&nbsp;<a href='javascript:launch("ostinato")'>Standard WASM build</a>
 	<br/>
