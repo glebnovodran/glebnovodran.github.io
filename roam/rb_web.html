@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+	<link rel="shortcut icon" href="favicon.ico">
+	<title>Roam Scripting Behchmark</title>
+
+	<style>
+	body {
+		font-family:Verdana, Geneva, sans-serif; font-size:11.2pt; color:#A2A2A4; background-color: #202025;
+		padding-top:12px; padding-left:12px; padding-right:12px; padding-bottom:12px;
+	}
+	#ctrl_panel {
+		background-color: #343445;
+		border: 2px dotted;
+		padding-top:8px; padding-left:8px; padding-right:8px; padding-bottom:8px;
+		position: absolute;
+		left: 70px; top: 60px;
+	}
+	a { color:#A7A7A4; }
+	</style>
+
+	<script>
+		function launch() {
+			var opts = "?";
+			var kind = "native";
+			var kindSel = document.getElementById("progkind");
+			if (kindSel) {
+				kind = kindSel.value;
+			}
+			opts += kind;
+			var mode="mode=1";
+			var modeSel = document.getElementById("mode");
+			if (modeSel) {
+				mode = modeSel.value;
+			}
+			opts += "&" + mode;
+			var page="roam_bench";
+			var ckbJS = document.getElementById("ckb_js");
+			if (ckbJS && ckbJS.checked) {
+				page += "_js";
+			}
+			var url = page + ".html" + opts;
+			//alert(url);
+			window.location.href = url;
+		}
+	</script>
+</head>
+
+<body>
+<table id="ctrl_panel"><tr><td>
+&#x261E;&nbsp;Scripting type:&nbsp;&nbsp;&nbsp;&nbsp;
+	<select id="progkind">
+		<option value="native">Native</option>
+		<option value="lua">Lua</option>
+		<option value="wrench">Wrench</option>
+		<option value="qjs">QuickJS</option>
+	</select>
+<br>
+&#x261E;&nbsp;Character mode:
+	<select id="mode">
+		<option value="mode=1">40 characters</option>
+		<option value="mode=0">20 charactes</option>
+		<option value="mode=-2">2 charactes</option>
+		<option value="mode=-1">Single character</option>
+	</select>
+<br>
+&#x261E;&nbsp;<input type="checkbox" id="ckb_js">&nbsp;Use JS instead of WASM</input>
+<br>
+&#x261E;&nbsp;<a href='javascript:launch()'><b>Start!</b></a>
+</td></tr></table>
+</body>
+</html>
+
