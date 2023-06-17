@@ -49,6 +49,16 @@
 				opts += "&noctrl";
 			}
 
+			const pageParams = new URLSearchParams(window.location.search);
+			if (pageParams !== null) {
+				if (pageParams.get("exerep") !== null) {
+					opts += "&exerep";
+				}
+				if (pageParams.get("lowq") !== null) {
+					opts += "&lowq";
+				}
+			}
+
 			var page="roam_bench";
 			var ckbJS = document.getElementById("ckb_js");
 			if (ckbJS && ckbJS.checked) {
