@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+	<link rel="shortcut icon" href="favicon.ico">
+	<title>Ostinato x Arduino</title>
+	<link rel="stylesheet" href="notes.css" />
+</head>
+
+<body>
+	<table id="main_text"><tr><td>
+		<!-- text start -->
+		<div class="header_text">&#x270D; Controlling Ostinato lighting with Arduino</div>
+		<br/>
+		<img src="images/arduodro.jpg" width="600"/>
+		<br/>
+		<br/>
+		<code><pre>
+const int inputPin = A0;
+const int lampPin = 9;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(inputPin, INPUT);
+  pinMode(lampPin, OUTPUT);
+}
+
+#define CMPX(a, b) if (a > b) { t = a; a = b; b = t; }
+
+void loop() {
+#if 0
+  // might be noisy
+  unsigned val = analogRead(inputPin);
+#else
+  // take median of 4 samples
+  unsigned t;
+  unsigned smp0 = analogRead(inputPin);
+  delay(2);
+  unsigned smp1 = analogRead(inputPin);
+  delay(2);
+  unsigned smp2 = analogRead(inputPin);
+  delay(2);
+  unsigned smp3 = analogRead(inputPin);
+  CMPX(smp0, smp2);
+  CMPX(smp1, smp3);
+  CMPX(smp0, smp1);
+  CMPX(smp2, smp3);
+  // CMPX(smp1, smp2);
+  unsigned val = (smp1 + smp2) >> 1;
+#endif
+  analogWrite(lampPin, val >> 2);
+  Serial.println(val);
+  delay(40);
+}
+</pre></code>
+
+		<!-- text end -->
+		</td></tr>
+	</table>
+</body>
+</html>
+
